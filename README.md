@@ -6,7 +6,7 @@ In order to demonstrate these concepts, we will build a small 'hello world' appl
 
 ##Hello world
 
-Rack is a library that provides a simplified interface between your ruby application and your server. We'll start by building an application that displays the words 'Hello world' in the client's browser window.
+Rack is a library that provides a simplified interface between your ruby application and your server (in this case, we will use 'thin', however there are many other servers we could use). We'll start by building an application that displays the words 'Hello world' in the client's browser window.
 
 * start by setting up a project with `bundle init`
 * add the gems 'rack' and 'thin' and then bundle install
