@@ -30,15 +30,15 @@ Maximum connections set to 1024
 Listening on localhost:8080, CTRL+C to stop
 ```
 
-You can see that when you call `Rack::Server.start`, the class method `.call` is being called on the `HelloWorldApp` class. You may recognize that we are injecting our HelloWorldApp class into the Server object via dependency injection.
+You can see that we are injecting our HelloWorldApp class into the Server object. The Rack::Server utilises polymorphism - it will work with any object that responds to `#call`. A rack app is simply an object that responds to `#call` and returns a response.
 
-We are providing a response to Rack in the form of an array containing three elements. This is known as the 'triplet', and will be converted into an HTTP response. The triplet consists of the status code, a hash of the headers and an enumerable containing the contents of the body.
+We are providing the response in the form of an array containing three elements. This is known as the 'triplet', and will be converted into an HTTP response. The triplet consists of the status code, a hash of the headers and an enumerable containing the contents of the body, in that order.
 
 If you now go to http://localhost:8080, you should see the message 'Hello world'. Congratulations - you have just written your first Rack app!
 
 ##rackup
 
-One issue with our current code is that it contains a line of code that will be executed immediately if you require the file - we wouldn't write code like this in a real application. Rack provides a tool to start a server from the command line - `rackup`. Let's get that set up.
+One issue with our current code is that it contains a line of code that will be executed immediately if you require the file - we wouldn't write code like this in a real application. Rack provides a CLI to start a server from the command line - `rackup`. Let's get that set up.
 
 * remove the two `require`s from the top of the file, and the entire last line (we don't want to start a server from within our code).
 * make a new file `config.ru` - the file extension stands for 'rackup'
@@ -46,11 +46,11 @@ One issue with our current code is that it contains a line of code that will be 
 * add the line `run HelloWorldApp` and save
 * try to run the code from your command line. Navigate to the correct folder, and run `rackup`.
 
-You should now be able to open your application in the browser exactly as you did before.
+You should now be able to open your application in the browser as you did before (bear in mind the default port for rackup is 9393).
 
 ##Return a query string
 
-So this is great, but we haven't really done anything very useful yet. It would be better if we could respond to input from a user, maybe in the form of some [params](https://github.com/makersacademy/course/blob/master/pills/params.md). We can practice that by returning the contents of some query string parameters. If we type in `http://localhost.com:8080?message=foo`, we want to see the word 'foo' appear in the browser window.
+So this is great, but we haven't really done anything very useful yet. It would be better if we could respond to input from a user, maybe in the form of some [params](https://github.com/makersacademy/course/blob/master/pills/params.md). We can practice that by returning the contents of some query string parameters. If we type in `http://localhost.com:9393?message=foo`, we want to see the word 'foo' appear in the browser window.
 
 * change the HelloWorldApp class to actually make use of the env parameter:
 ```ruby
@@ -60,7 +60,8 @@ class HelloWorldApp
   end
 end
 ```
-* run `http://localhost.com:8080?message=foo`. You should see the word 'foo' on the page, although the format is a little strange!
+* run `rackup`
+* In your browser, navigate to `http://localhost.com:9393?message=foo`. You should see the word 'foo' on the page, although the format is a little strange!
 * what can you infer about the contents of the env parameter that Rack is passing into your application? 
 * Can you display the entire contents of the env to the page?
 
@@ -150,7 +151,7 @@ run HelloWorldApp
 
 If rack provides the space to hang a stack of middleware, frameworks can extend its functionality with complex routing systems and MVC server structures. Checkout the [rack github](https://github.com/rack/rack) for a list of supported frameworks. Let's examine how rack provides the tools for more complex frameworks:
 * run `rackup` in your hello_world directory.
-* In your browser, go to `http://localhost:8080/messages/new`
+* In your browser, go to `http://localhost:9393/messages/new`
 * Does the new routing make any difference to the message you see on the screen?
 * Could you output the new path to the browser window?
 * How does a framework like sinatra make use of the Rack library?
