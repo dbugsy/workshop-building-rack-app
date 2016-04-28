@@ -9,6 +9,6 @@ end
 
 class HelloWorldApp
   def self.call(env)
-    HelloWorld.new.response
+    [200, {}, ["Hello world, you said #{env['QUERY_STRING']}"]]
   end
 end
