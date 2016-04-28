@@ -16,4 +16,9 @@ feature 'hello world' do
     visit('/')
     expect(page).to have_content('nothing!')
   end
+
+  scenario 'returns a 202' do
+    visit('/')
+    expect(page.status_code).to eq(202)
+  end
 end
