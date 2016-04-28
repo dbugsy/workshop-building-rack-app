@@ -50,7 +50,7 @@ You should now be able to open your application in the browser as you did before
 
 ##Return a query string
 
-So this is great, but we haven't really done anything very useful yet. It would be better if we could respond to input from a user, maybe in the form of some [params](https://github.com/makersacademy/course/blob/master/pills/params.md). We can practice that by returning the contents of some query string parameters. If we type in `http://localhost.com:9393?message=foo`, we want to see the word 'foo' appear in the browser window.
+So this is great, but we haven't really done anything very useful yet. It would be better if we could respond to input from a user, maybe in the form of some [params](https://github.com/makersacademy/course/blob/master/pills/params.md). We can practice that by returning the contents of some query string parameters. If we type in `http://localhost:9393?message=foo`, we want to see the word 'foo' appear in the browser window.
 
 * change the HelloWorldApp class to actually make use of the env parameter:
 ```ruby
@@ -61,7 +61,7 @@ class HelloWorldApp
 end
 ```
 * run `rackup`
-* In your browser, navigate to `http://localhost.com:9393?message=foo`. You should see the word 'foo' on the page, although the format is a little strange!
+* In your browser, navigate to `http://localhost:9393?message=foo`. You should see the word 'foo' on the page, although the format is a little strange!
 * what can you infer about the contents of the env parameter that Rack is passing into your application? 
 * Can you display the entire contents of the env to the page?
 
