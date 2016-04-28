@@ -9,6 +9,8 @@ end
 
 class HelloWorldApp
   def self.call(env)
-    [200, {}, ["Hello world, you said #{env['QUERY_STRING']}"]]
+    request = Rack::Request.new(env)
+    message = request.params['message'] || 'nothing!'
+      [200, {}, ["Hello world! You said #{message}"]]
   end
 end

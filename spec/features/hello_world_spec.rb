@@ -8,6 +8,12 @@ feature 'hello world' do
 
   scenario 'returning query string data' do
     visit('?message=foo')
-    expect(page).to have_content('message=foo')
+    expect(page).to have_content('foo')
+    expect(page).not_to have_content('message=')
+  end
+
+  scenario 'returning nothing' do
+    visit('/')
+    expect(page).to have_content('nothing!')
   end
 end
