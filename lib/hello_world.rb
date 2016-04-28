@@ -7,6 +7,19 @@ class HelloWorld
   end
 end
 
+class Logger
+  
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    p env.inspect
+    @app.call(env)
+  end
+
+end
+
 class HelloWorldApp
   def self.call(env)
     request = Rack::Request.new(env)
